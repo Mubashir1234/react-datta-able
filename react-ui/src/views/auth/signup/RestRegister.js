@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 import axios from 'axios';
 import useScriptRef from '../../../hooks/useScriptRef';
-import { API_SERVER } from './../../../config/constant';
+//import { API_SERVER } from './../../../config/constant';
 
 const RestRegister = ({ className, ...rest }) => {
     let history = useHistory();
@@ -29,12 +29,13 @@ const RestRegister = ({ className, ...rest }) => {
                 onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
                     try {
                         axios
-                            .post(API_SERVER + 'users/register', {
+                            .post('http://localhost:4000/api/users/register', {
                                 username: values.username,
                                 password: values.password,
                                 email: values.email
                             })
                             .then(function (response) {
+                                console.log('hello');
                                 if (response.data.success) {
                                     history.push('/auth/signin');
                                 } else {
